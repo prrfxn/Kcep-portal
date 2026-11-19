@@ -10,33 +10,63 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as BookVenueRouteImport } from './routes/book-venue'
+import { Route as GateScannerRouteImport } from './routes/gate-scanner'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookVenueRoute = BookVenueRouteImport.update({
+  id: '/book-venue',
+  path: '/book-venue',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GateScannerRoute = GateScannerRouteImport.update({
+  id: '/gate-scanner',
+  path: '/gate-scanner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/book-venue': typeof BookVenueRoute
+  '/gate-scanner': typeof GateScannerRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/book-venue': typeof BookVenueRoute
+  '/gate-scanner': typeof GateScannerRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/book-venue': typeof BookVenueRoute
+  '/gate-scanner': typeof GateScannerRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/admin' | '/book-venue' | '/gate-scanner'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/admin' | '/book-venue' | '/gate-scanner'
+  id: '__root__' | '/' | '/admin' | '/book-venue' | '/gate-scanner'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  BookVenueRoute: typeof BookVenueRoute
+  GateScannerRoute: typeof GateScannerRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +78,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book-venue': {
+      id: '/book-venue'
+      path: '/book-venue'
+      fullPath: '/book-venue'
+      preLoaderRoute: typeof BookVenueRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gate-scanner': {
+      id: '/gate-scanner'
+      path: '/gate-scanner'
+      fullPath: '/gate-scanner'
+      preLoaderRoute: typeof GateScannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  BookVenueRoute: BookVenueRoute,
+  GateScannerRoute: GateScannerRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

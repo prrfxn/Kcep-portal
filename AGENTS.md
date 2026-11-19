@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Portal business rules (passes, scanning, bookings, reassignment, registry) live as pure functions in `src/lib/portal-logic.ts`; UI calls them through `src/lib/portal-store.ts`. Why: one tested source of truth, and the storage layer can be swapped without touching rules.
+- `src/lib/portal-store.ts` persists state to localStorage via `useSyncExternalStore` with seed data as the server snapshot. Why: SSR-safe hydration for a browser-only demo.
+- The webcam scanner dynamically imports `html5-qrcode` on click. Why: it touches browser APIs and must not load during SSR.
