@@ -1,4 +1,4 @@
-# Quad Entry Compass
+# KCEP - KCC Event & Pass Portal
 
 Create a crisp, minimalistic web app called 'KCC Event & Pass Portal' using React, Tailwind CSS, and Lucide icons. Use a clean white/slate color palette with emerald and amber status badges. Build a simple top navigation bar with 4 tabs: 'Events & Passes', 'Book Venue', 'Gate Scanner', and 'Admin'.
 
