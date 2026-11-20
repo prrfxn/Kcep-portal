@@ -412,7 +412,7 @@ function EventsPage() {
             </span>
           </div>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full max-w-full min-w-0 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {activeEvents.map((ev) => {
               const { totalSeats, remainingSeats } = ev;
               const pct = totalSeats ? Math.round(((totalSeats - remainingSeats) / totalSeats) * 100) : 100;
@@ -420,7 +420,7 @@ function EventsPage() {
               return (
                 <article
                   key={ev.id}
-                  className="flex flex-col rounded-xl border border-border bg-surface p-5 shadow-card"
+                  className="flex flex-col w-full min-w-0 rounded-xl border border-border bg-surface p-4 sm:p-5 shadow-card"
                 >
                   <div className="flex items-start gap-3">
                     <div className="grid w-12 shrink-0 place-items-center rounded-lg border border-border py-1.5 text-center leading-none">

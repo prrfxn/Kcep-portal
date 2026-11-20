@@ -244,10 +244,10 @@ function GateScannerPage() {
         title="Gate Scanner"
         subtitle="Scan a pass QR code or enter its token. Each pass admits once."
       />
-      <div className="overflow-hidden rounded-xl border border-border bg-surface shadow-card">
+      <div className="w-full max-w-full min-w-0 overflow-hidden rounded-xl border border-border bg-surface shadow-card">
         {/* Scanning For Event dropdown */}
-        <div className="flex flex-col gap-2.5 border-b border-border bg-surface/50 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div className="min-w-0">
+        <div className="flex w-full min-w-0 flex-col gap-2.5 border-b border-border bg-surface/50 p-4 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="min-w-0 flex-1">
             <Label htmlFor="scanning-for-event" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Scanning For Event
             </Label>
@@ -284,8 +284,8 @@ function GateScannerPage() {
           </div>
         </div>
 
-        <div className="grid md:grid-cols-2">
-          <div className="space-y-5 border-b border-border p-5 sm:p-6 md:border-b-0 md:border-r">
+        <div className="grid w-full min-w-0 md:grid-cols-2">
+          <div className="w-full min-w-0 space-y-5 border-b border-border p-4 sm:p-6 md:border-b-0 md:border-r">
             <h2 className="flex items-center gap-2 text-sm font-semibold">
               <ScanLine className="size-4" /> Webcam scanner
             </h2>
@@ -311,7 +311,7 @@ function GateScannerPage() {
               </div>
             </form>
           </div>
-          <div className="flex min-h-[28rem] flex-col p-5 sm:p-6">
+          <div className="flex min-h-[24rem] sm:min-h-[28rem] w-full min-w-0 flex-col p-4 sm:p-6">
             <div className="mb-4 flex items-center justify-between">
               <h2 className="text-sm font-semibold">Status</h2>
               {result.kind !== "idle" && (

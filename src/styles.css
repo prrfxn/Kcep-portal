@@ -179,6 +179,19 @@
     border-color: var(--color-border);
   }
 
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
+    padding-right: 0 !important;
+    width: 100% !important;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);

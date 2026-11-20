@@ -111,8 +111,8 @@ function StatsCards({
   const pct =
     stats.totalPasses > 0 ? Math.round((stats.checkedIn / stats.totalPasses) * 100) : 0;
   return (
-    <div className="grid gap-4 sm:grid-cols-3 mb-6">
-      <div className="rounded-xl border border-border bg-primary/10 p-5 flex items-center gap-4">
+    <div className="grid w-full max-w-full min-w-0 gap-4 sm:grid-cols-3 mb-6">
+      <div className="w-full min-w-0 rounded-xl border border-border bg-primary/10 p-5 flex items-center gap-4">
         <CalendarCheck className="size-7 text-primary shrink-0" />
         <div className="min-w-0">
           <p className="text-2xl font-bold">{stats.approvedEvents}</p>
@@ -121,16 +121,16 @@ function StatsCards({
           </p>
         </div>
       </div>
-      <div className="rounded-xl border border-border bg-success-soft p-5 flex items-center gap-4">
+      <div className="w-full min-w-0 rounded-xl border border-border bg-success-soft p-5 flex items-center gap-4">
         <Ticket className="size-7 text-success shrink-0" />
-        <div>
+        <div className="min-w-0">
           <p className="text-2xl font-bold">{stats.totalPasses}</p>
           <p className="text-xs text-muted-foreground">Passes Issued</p>
         </div>
       </div>
-      <div className="rounded-xl border border-border bg-warning-soft p-5 flex items-center gap-4">
+      <div className="w-full min-w-0 rounded-xl border border-border bg-warning-soft p-5 flex items-center gap-4">
         <CheckCircle2 className="size-7 text-warning shrink-0" />
-        <div>
+        <div className="min-w-0">
           <p className="text-2xl font-bold">
             {stats.checkedIn}{" "}
             <span className="text-sm font-normal text-muted-foreground">/ {stats.totalPasses}</span>
@@ -208,7 +208,7 @@ function EventBreakdownTable({
   }
 
   return (
-    <div className="mb-6 rounded-xl border border-border bg-surface shadow-card overflow-hidden">
+    <div className="mb-6 w-full max-w-full min-w-0 rounded-xl border border-border bg-surface shadow-card overflow-hidden">
       <div className="flex flex-col gap-2 border-b border-border px-5 py-3.5 bg-secondary/30 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
@@ -464,8 +464,8 @@ function AdminPage() {
       )}
 
       {/* Event Attendance Filter Header */}
-      <div className="mb-4 flex flex-col gap-2 rounded-xl border border-border bg-surface p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
-        <div>
+      <div className="mb-4 flex w-full max-w-full min-w-0 flex-col gap-2 rounded-xl border border-border bg-surface p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+        <div className="min-w-0 flex-1">
           <h3 className="text-sm font-semibold">Attendance Overview</h3>
           <p className="text-xs text-muted-foreground">
             {isFiltered
@@ -473,7 +473,7 @@ function AdminPage() {
               : "Aggregated metrics for all upcoming campus events"}
           </p>
         </div>
-        <div className="w-full sm:w-80">
+        <div className="w-full sm:w-80 shrink-0">
           <Select value={selectedMetricEventId} onValueChange={setSelectedMetricEventId}>
             <SelectTrigger className="w-full bg-background">
               <SelectValue placeholder="All Upcoming Events" />
@@ -531,7 +531,7 @@ function AdminPage() {
       />
 
       {/* Pending venue requests */}
-      <section className="rounded-xl border border-border bg-surface shadow-card">
+      <section className="w-full max-w-full min-w-0 rounded-xl border border-border bg-surface shadow-card">
         <div className="flex items-center justify-between border-b border-border px-5 py-4">
           <h2 className="text-sm font-semibold">Pending Venue Requests</h2>
           <Badge variant={pending.length ? "warning" : "neutral"}>{pending.length} pending</Badge>
@@ -777,7 +777,7 @@ function ExportAttendanceSection({ venues }: { venues: DbVenue[] }) {
   const pastApproved = approvedEvents.filter((ev) => !isEventActive(ev.event_date, ev.end_time));
 
   return (
-    <section className="mt-6 rounded-xl border border-border bg-surface shadow-card">
+    <section className="mt-6 w-full max-w-full min-w-0 rounded-xl border border-border bg-surface shadow-card">
       <div className="border-b border-border px-5 py-4">
         <h2 className="text-sm font-semibold">Export Attendance CSV</h2>
         <p className="mt-0.5 text-xs text-muted-foreground">
@@ -965,7 +965,7 @@ function Registry({ onStudentAdded }: { onStudentAdded: () => void }) {
   });
 
   return (
-    <section className="mt-8 rounded-xl border border-border bg-surface shadow-card">
+    <section className="mt-8 w-full max-w-full min-w-0 rounded-xl border border-border bg-surface shadow-card overflow-hidden">
       <div className="flex items-center justify-between border-b border-border px-5 py-4">
         <div>
           <h2 className="text-sm font-semibold">College ERP Student Registry</h2>

@@ -220,10 +220,10 @@ function BookVenuePage() {
         title="Book Venue"
         subtitle="Request a hall or classroom for your event. The admin approves, reassigns or rejects it."
       />
-      <div className="grid gap-6 lg:grid-cols-[1.05fr_1fr]">
+      <div className="grid w-full max-w-full min-w-0 gap-6 lg:grid-cols-[1.05fr_1fr]">
         <form
           onSubmit={submit}
-          className="space-y-4 rounded-xl border border-border bg-surface p-5 shadow-card sm:p-6"
+          className="w-full max-w-full min-w-0 space-y-4 rounded-xl border border-border bg-surface p-4 sm:p-6 shadow-card"
         >
           <h2 className="text-sm font-semibold">New venue request</h2>
           <Field id="title" label="Event Title">
@@ -323,18 +323,18 @@ function BookVenuePage() {
           </Button>
         </form>
 
-        <section className="rounded-xl border border-border bg-surface p-5 shadow-card sm:p-6">
+        <section className="w-full max-w-full min-w-0 rounded-xl border border-border bg-surface p-4 sm:p-6 shadow-card">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <h2 className="text-sm font-semibold">My Booking Requests</h2>
             <div className="flex items-center gap-2">
-              <Label htmlFor="lookup" className="text-xs text-muted-foreground">
+              <Label htmlFor="lookup" className="text-xs text-muted-foreground whitespace-nowrap">
                 Organizer Roll No
               </Label>
               <Input
                 id="lookup"
                 value={lookup}
                 onChange={(e) => setLookup(e.target.value)}
-                className="h-8 w-32 font-mono text-xs"
+                className="h-8 w-28 sm:w-32 font-mono text-xs"
               />
             </div>
           </div>
