@@ -44,15 +44,28 @@ function ErrorComponent({ error, reset }: ErrorComponentProps) {
     reportLovableError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
+  const errorMessage = error instanceof Error ? error.message : String(error ?? "Unknown error");
+  const errorStack = error instanceof Error ? error.stack : undefined;
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <div className="max-w-md text-center">
+    <div className="flex min-h-screen items-center justify-center bg-background px-4 py-8">
+      <div className="w-full max-w-lg text-center">
         <h1 className="text-xl font-semibold tracking-tight text-foreground">
           This page didn't load
         </h1>
         <p className="mt-2 text-sm text-muted-foreground">
           Something went wrong on our end. You can try refreshing or head back home.
         </p>
+
+        {/* Live readable error message */}
+        <div className="mt-4 overflow-hidden rounded-lg border border-destructive/30 bg-destructive/10 p-3 text-left">
+          <p className="text-xs font-semibold text-destructive mb-1">Error details:</p>
+          <pre className="max-h-48 overflow-auto font-mono text-xs text-destructive whitespace-pre-wrap break-words">
+            {errorMessage}
+            {errorStack ? `\n\n${errorStack}` : ""}
+          </pre>
+        </div>
+
         <div className="mt-6 flex flex-wrap justify-center gap-2">
           <button
             onClick={() => {
@@ -91,14 +104,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Campus events, venue booking and QR entry passes for KCC.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "/kcc-logo.png" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: "/kcc-logo.png" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
       },
-      { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
+      { rel: "icon", href: "/kcc-logo.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/kcc-logo.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

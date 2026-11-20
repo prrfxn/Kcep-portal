@@ -133,6 +133,47 @@
   --shadow-pass: 0 24px 48px -20px oklch(0.208 0.042 265.755 / 0.28);
 }
 
+/* Dark mode overrides — toggled via .dark class on <html> */
+.dark {
+  --background: oklch(0.145 0.025 265);
+  --foreground: oklch(0.96 0.005 247);
+  --surface: oklch(0.185 0.025 265);
+  --card: oklch(0.185 0.025 265);
+  --card-foreground: oklch(0.96 0.005 247);
+  --popover: oklch(0.185 0.025 265);
+  --popover-foreground: oklch(0.96 0.005 247);
+  --primary: oklch(0.84 0.025 247);
+  --primary-foreground: oklch(0.145 0.025 265);
+  --secondary: oklch(0.24 0.028 265);
+  --secondary-foreground: oklch(0.9 0.01 247);
+  --muted: oklch(0.24 0.028 265);
+  --muted-foreground: oklch(0.65 0.03 257);
+  --accent: oklch(0.24 0.028 265);
+  --accent-foreground: oklch(0.96 0.005 247);
+  --destructive: oklch(0.65 0.22 17);
+  --destructive-foreground: oklch(0.98 0.003 247);
+  --danger-soft: oklch(0.22 0.04 15);
+  --success: oklch(0.62 0.145 163);
+  --success-foreground: oklch(0.145 0.025 265);
+  --success-soft: oklch(0.2 0.04 160);
+  --warning: oklch(0.72 0.16 55);
+  --warning-foreground: oklch(0.145 0.025 265);
+  --warning-soft: oklch(0.22 0.04 60);
+  --border: oklch(0.3 0.025 260);
+  --input: oklch(0.3 0.025 260);
+  --ring: oklch(0.5 0.04 256);
+  --shadow-card: 0 1px 2px 0 oklch(0 0 0 / 0.3), 0 1px 3px 0 oklch(0 0 0 / 0.2);
+  --shadow-pass: 0 24px 48px -20px oklch(0 0 0 / 0.5);
+  --sidebar: oklch(0.165 0.025 265);
+  --sidebar-foreground: oklch(0.96 0.005 247);
+  --sidebar-primary: oklch(0.84 0.025 247);
+  --sidebar-primary-foreground: oklch(0.145 0.025 265);
+  --sidebar-accent: oklch(0.24 0.028 265);
+  --sidebar-accent-foreground: oklch(0.96 0.005 247);
+  --sidebar-border: oklch(0.3 0.025 260);
+  --sidebar-ring: oklch(0.5 0.04 256);
+}
+
 @layer base {
   * {
     border-color: var(--color-border);
