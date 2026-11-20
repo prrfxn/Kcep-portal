@@ -1,6 +1,13 @@
 import { useState, useEffect } from "react";
 import { Sun, Moon, ScanLine, ShieldCheck, Lock, GraduationCap } from "lucide-react";
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 // ── Types ────────────────────────────────────────────────────────────────────
 export type Role = "student" | "gate" | "admin";
@@ -177,9 +184,9 @@ export function AppHeader() {
   const navLinks = NAV_LINKS[role];
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur dark:bg-surface/90 w-full max-w-full overflow-x-hidden">
+    <header className="sticky top-0 z-40 border-b border-border bg-surface/90 backdrop-blur dark:bg-surface/90 w-full">
       {/* ── Main bar ──────────────────────────────────────────────────────── */}
-      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-3 py-2.5 sm:px-4 sm:py-3">
+      <div className="mx-auto flex max-w-7xl flex-wrap sm:flex-nowrap items-center justify-between gap-2 px-3 py-2.5 sm:px-4 sm:py-3">
         {/* Logo + title */}
         <Link to="/" className="flex shrink-0 items-center gap-2 hover:opacity-80 transition-opacity">
           <img src="/kcc-logo.png" alt="KCC Institute of Technology and Management" className="h-8 w-auto sm:h-9 rounded" />
@@ -192,81 +199,33 @@ export function AppHeader() {
         {/* Controls: Segmented role switch + Theme toggle */}
         <div className="flex items-center gap-1.5 sm:gap-2">
           {/* Segmented role switch */}
-          <div className="relative flex flex-col items-end">
-            <div
-              className="flex items-center rounded-lg border border-border bg-muted p-0.5 gap-0.5"
-              role="group"
-              aria-label="Switch role"
-            >
-              {SEGMENTS.map(({ role: seg, label, icon }) => {
-                const isActive = role === seg && pendingRole === null;
-                const isPending = pendingRole === seg;
-                return (
-                  <button
-                    key={seg}
-                    onClick={() => handleSegmentClick(seg)}
-                    aria-pressed={isActive}
-                    className={[
-                      "flex items-center gap-1 rounded-md px-2 py-1 text-[11px] sm:px-3 sm:py-1.5 sm:text-xs font-medium transition-all whitespace-nowrap",
-                      isActive
-                        ? "bg-background text-foreground shadow-sm font-semibold"
-                        : isPending
-                        ? "bg-background/60 text-foreground ring-2 ring-primary/40"
-                        : "text-muted-foreground hover:text-foreground hover:bg-background/50",
-                    ].join(" ")}
-                  >
-                    {icon}
-                    <span>{label}</span>
-                  </button>
-                );
-              })}
-            </div>
-
-            {/* Inline passcode prompt card */}
-            {pendingRole !== null && (
-              <div className="absolute top-full mt-2 right-0 z-50 w-64 max-w-[calc(100vw-2rem)] rounded-lg border border-border bg-background p-3 shadow-lg">
-                <div className="flex items-center gap-1.5 mb-2 text-xs font-semibold text-foreground">
-                  <Lock className="h-3.5 w-3.5 text-muted-foreground" />
-                  Enter passcode for{" "}
-                  <span className="text-primary">
-                    {pendingRole === "gate" ? "Gate Staff" : "Admin"}
-                  </span>
-                </div>
-                <input
-                  type="password"
-                  autoFocus
-                  value={passcode}
-                  onChange={(e) => {
-                    setPasscode(e.target.value);
-                    if (passcodeError) setPasscodeError(false);
-                  }}
-                  onKeyDown={handlePasscodeKeyDown}
-                  placeholder="Passcode"
-                  className="w-full rounded-md border border-border bg-muted px-2.5 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/50 mb-2"
-                />
-                {passcodeError && (
-                  <p className="text-xs text-red-500 mb-2">Incorrect passcode</p>
-                )}
-                <div className="flex gap-2">
-                  <button
-                    onClick={handlePasscodeConfirm}
-                    className="flex-1 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
-                  >
-                    Confirm
-                  </button>
-                  <button
-                    onClick={() => {
-                      setPendingRole(null);
-                      setPasscode("");
-                      setPasscodeError(false);
-                    }}
-                    className="flex-1 rounded-md border border-border px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </div>
-            )}
+          <div
+            className="flex items-center rounded-lg border border-border bg-muted p-0.5 gap-0.5"
+            role="group"
+            aria-label="Switch role"
+          >
+            {SEGMENTS.map(({ role: seg, label, icon }) => {
+              const isActive = role === seg && pendingRole === null;
+              const isPending = pendingRole === seg;
+              return (
+                <button
+                  key={seg}
+                  onClick={() => handleSegmentClick(seg)}
+                  aria-pressed={isActive}
+                  className={[
+                    "flex items-center gap-1 rounded-md px-2 py-1 text-[11px] sm:px-3 sm:py-1.5 sm:text-xs font-medium transition-all whitespace-nowrap",
+                    isActive
+                      ? "bg-background text-foreground shadow-sm font-semibold"
+                      : isPending
+                      ? "bg-background/60 text-foreground ring-2 ring-primary/40"
+                      : "text-muted-foreground hover:text-foreground hover:bg-background/50",
+                  ].join(" ")}
+                >
+                  {icon}
+                  <span>{label}</span>
+                </button>
+              );
+            })}
           </div>
 
           {/* Theme toggle */}
@@ -293,6 +252,78 @@ export function AppHeader() {
           </Link>
         ))}
       </nav>
+
+      {/* ── Passcode Modal Dialog ────────────────────────────────────────── */}
+      <Dialog
+        open={pendingRole !== null}
+        onOpenChange={(open) => {
+          if (!open) {
+            setPendingRole(null);
+            setPasscode("");
+            setPasscodeError(false);
+          }
+        }}
+      >
+        <DialogContent className="sm:max-w-xs">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-1.5 text-sm font-semibold">
+              <Lock className="h-4 w-4 text-primary" />
+              Enter Passcode
+            </DialogTitle>
+            <DialogDescription className="text-xs">
+              Enter passcode to unlock{" "}
+              <span className="font-semibold text-foreground">
+                {pendingRole === "gate" ? "Gate Staff" : "Admin"}
+              </span>.
+            </DialogDescription>
+          </DialogHeader>
+
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              handlePasscodeConfirm();
+            }}
+            className="space-y-3 pt-1"
+          >
+            <div>
+              <input
+                type="password"
+                autoFocus
+                value={passcode}
+                onChange={(e) => {
+                  setPasscode(e.target.value);
+                  if (passcodeError) setPasscodeError(false);
+                }}
+                placeholder="Passcode"
+                className="w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+              />
+              {passcodeError && (
+                <p className="mt-1 text-xs text-destructive">Incorrect passcode. Try again.</p>
+              )}
+            </div>
+
+            <div className="flex gap-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setPendingRole(null);
+                  setPasscode("");
+                  setPasscodeError(false);
+                }}
+                className="flex-1 rounded-md border border-input bg-background px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="flex-1 rounded-md bg-primary px-3 py-1.5 text-xs font-semibold text-primary-foreground hover:bg-primary/90 transition-colors"
+              >
+                Confirm
+              </button>
+            </div>
+          </form>
+        </DialogContent>
+      </Dialog>
     </header>
   );
 }

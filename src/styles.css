@@ -179,24 +179,27 @@
     border-color: var(--color-border);
   }
 
-  html,
-  body {
+  html {
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
+  }
+
+  body {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    overflow-x: hidden;
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
   }
 
   body[data-scroll-locked] {
     margin-right: 0 !important;
     padding-right: 0 !important;
     width: 100% !important;
-  }
-
-  body {
-    background-color: var(--color-background);
-    color: var(--color-foreground);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
   }
 }
 
